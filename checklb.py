@@ -1,6 +1,7 @@
 import requests
 from argparse import ArgumentParser
 import json
+from time import sleep
 
 # Function to get node list
 def getnodes(url):
@@ -53,11 +54,12 @@ def getlbstats(url):
 
 # Main Function
 def main(host,port,minReqs,maxReqs):
-    url='http://localhost:8188'
+    url=f'http://{host}:{port}'
     while True:
         getlbstats(url)
         nodelist = getnodes(url)
         loadlogic(url,nodelist,minReqs,maxReqs)
+        sleep(3)
 
 if __name__ == '__main__':
     # Setup Argument Parser
@@ -65,9 +67,9 @@ if __name__ == '__main__':
 
     # Add Arguments
     parser.add_argument('-t', '--target', dest='target', help='url of the host to check', default='localhost')
-    parser.add_argument('-p', '--port', dest='port', help='port of the host to check', default='8181')
-    parser.add_argument('-m', '--min', dest='min', help='minimum number of requests', default='200')
-    parser.add_argument('-x', '--max', dest='max', help='maximum number of requests', default='400')
+    parser.add_argument('-p', '--port', dest='port', help='port of the host to check', default='8188')
+    parser.add_argument('-m', '--min', dest='min', help='minimum number of requests', default='100')
+    parser.add_argument('-x', '--max', dest='max', help='maximum number of requests', default='350')
 
     # Parse and Place
     args = parser.parse_args()

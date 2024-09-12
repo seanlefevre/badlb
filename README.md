@@ -1,23 +1,25 @@
 # Bad Load Balancer Balancer
 
 ## Purpose
-This Application is to be run to offset load balancer issues. Ensuring that nodes do not exceed the limit of requests so that the requests are not dropped
+This application is to be run to offset load balancer issues. It is to ensure that nodes do not exceed the limit of requests and that the requests are not dropped
 
 ## Prerequisites
-Docker (for the load balancer)
-Python3 (for the application)
+- Docker (for the load balancer)
+- Python3 (for the application)
 
 ## Setup
-run `pip3 install argparse requests` to ensure all required packages are installed
+- Run `pip3 install argparse requests` to ensure all required packages are installed
+- Run `docker run --pull always -it --rm -p 8188:8188 korvus/bad_load_balancer:0.1.1` to start the simulation
 
 ## How to Run
-Run `python3 checklb.py`
-see Usage for advanced options
+- Run `python3 checklb.py`
+   
+** See Usage for advanced options **
 
 ## Usage
-usage: checklb.py [-h] [-t TARGET] [-p PORT] [-m MIN] [-x MAX]. 
+Usage: checklb.py [-h] [-t TARGET] [-p PORT] [-m MIN] [-x MAX]. 
 
-optional arguments:  
+Optional arguments:  
 | Short arugment | Full arugment | Default | Description |
 | :---------------- | :------: | :------: | ----: |
 | -h     |   --help  | N/A | show this help message and exit  |
@@ -25,10 +27,3 @@ optional arguments:
 | -p PORT | --port PORT | 8188 | port of the host to check  |
 | -m MIN |  --min MIN | 100 | minimum number of requests  |
 | -x MAX |  --max MAX | 350 | maximum number of requests |
-
-
-  -h, --help   show this help message and exit  
-  -t TARGET, --target TARGET url of the host to check  
-  -p PORT, --port PORT  port of the host to check  
-  -m MIN, --min MIN     minimum number of requests  
-  -x MAX, --max MAX     maximum number of requests  
